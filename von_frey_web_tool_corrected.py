@@ -35,7 +35,18 @@ if st.button("查询阈值"):
         merged_df_display = merged_df.copy()
         merged_df_display.rename(columns={"Binary_Pattern": "输入序列"}, inplace=True)
         merged_df_display.insert(0, "序号", range(1, len(merged_df_display) + 1))
-        merged_df_display.set_index("序号", inplace=True)
+        merged_df_display.rename(columns={"Binary_Pattern": "输入序列"}, inplace=True)
+
+        # 添加“反应序列”列（输入序列的 O/X 转换）
+        merged_df_display["反应序列"] = merged_df_display["输入序列"].apply(
+            lambda x: x.replace("0", "O").replace("1", "X")
+        )
+
+        # 将“反应序列”列移到“输入序列”右边
+        cols = list(merged_df_display.columns)
+        if "反应序列" in cols and "输入序列" in cols:
+            cols.insert(cols.index("输入序列") + 1, cols.pop(cols.index("反应序列")))
+            merged_df_display = merged_df_display[cols]
 
         st.write("查询结果如下：")
         st.dataframe(merged_df_display, use_container_width=True)
