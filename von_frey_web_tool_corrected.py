@@ -29,7 +29,7 @@ if st.button("查询阈值"):
     else:
         query_list = [line.strip() for line in input_text.splitlines() if line.strip()]
         result_df = pd.DataFrame(query_list, columns=["Binary_Pattern"])
-        merged_df = result_df.merge(df, on="Binary_Pattern", how="left")
+        merged_df = result_df.merge(df, on="Binary_Pattern", how="left", sort=False)
         st.write("查询结果如下：")
         st.dataframe(merged_df)
         csv = merged_df.to_csv(index=False).encode('utf-8')
