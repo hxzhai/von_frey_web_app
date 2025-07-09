@@ -30,7 +30,11 @@ if st.button("查询阈值"):
         query_list = [line.strip() for line in input_text.splitlines() if line.strip()]
         result_df = pd.DataFrame(query_list, columns=["Binary_Pattern"])
         merged_df = result_df.merge(df, on="Binary_Pattern", how="left", sort=False)
+        
+        merged_df_display = merged_df.copy()
+        merged_df_display.insert(0, "序号", range(1, len(merged_df) + 1))
+
         st.write("查询结果如下：")
-        st.dataframe(merged_df)
+        st.dataframe(merged_df_display, use_container_width=True)
         csv = merged_df.to_csv(index=False).encode('utf-8')
         st.download_button("下载结果 CSV", csv, "von_frey_results.csv", "text/csv")
