@@ -28,12 +28,15 @@ if st.button("查询阈值"):
         st.warning("请输入至少一个序列")
     else:
         query_list = [line.strip() for line in input_text.splitlines() if line.strip()]
-        result_df = pd.DataFrame(query_list, columns=["输入序列"])
-        merged_df = result_df.merge(df, on="输入序列", how="left", sort=False)
-        
+        result_df = pd.DataFrame(query_list, columns=["Binary_Pattern"])
+        merged_df = result_df.merge(df, on="Binary_Pattern", how="left", sort=False)
+
+        # 添加序号 & 显示中文列名
         merged_df_display = merged_df.copy()
-        merged_df_display.insert(0, "序号", range(1, len(merged_df) + 1))
+        merged_df_display.rename(columns={"Binary_Pattern": "输入序列"}, inplace=True)
+        merged_df_display.insert(0, "序号", range(1, len(merged_df_display) + 1))
         merged_df_display = merged_df_display.reset_index(drop=True)
+
         st.write("查询结果如下：")
         st.dataframe(merged_df_display, use_container_width=True)
         csv = merged_df.to_csv(index=False).encode('utf-8')
