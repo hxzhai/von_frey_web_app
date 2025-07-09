@@ -35,7 +35,7 @@ if st.button("查询阈值"):
         merged_df_display = merged_df.copy()
         merged_df_display.rename(columns={"Binary_Pattern": "输入序列"}, inplace=True)
         merged_df_display.insert(0, "序号", range(1, len(merged_df_display) + 1))
-        merged_df_display = merged_df_display.reset_index(drop=True)
+        merged_df_display.set_index("序号", inplace=True)
 
         st.write("查询结果如下：")
         st.dataframe(merged_df_display, use_container_width=True)
