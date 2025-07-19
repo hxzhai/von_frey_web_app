@@ -17,7 +17,8 @@ st.markdown("""
 #### 使用说明：
 本工具是基于 von Frey 行为测试中常用的五根纤维丝（**0.16 g、0.4 g、0.6 g、1.0 g、2.0 g**）的反应组合规律所构建的阈值换算表。  
 其结果基于对这些特定力度纤维丝的递进测试设计，**不适用于其他力度**（如 0.07 g 或 4.0 g）。  
-⚠️ 请勿混用，以确保换算结果的科学性和可解释性。
+⚠️ 请勿混用，以确保换算结果的科学性和可解释性。  
+参考文献：Bonin RP, Bories C, De Koninck Y. A simplified up-down method (SUDO) for measuring mechanical nociception in rodents using von Frey filaments. Mol Pain. 2014 Apr 16;10:26. doi: 10.1186/1744-8069-10-26. 
 """)
 st.markdown("反应序列如OOOOXO（由 0 表示阴性，1 表示阳性，即输入 **000010**），可单个或多个查询。")
 
